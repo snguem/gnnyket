@@ -1,0 +1,101 @@
+{% extends "shared/base.html" %}
+
+{% block head %}
+    {% include "component/head.sales.html" %}
+{% endblock head %}
+    
+{% block body %}
+    {% include "component/menu.sales.html" %}
+    
+    <section class="main_content dashboard_part large_header_bg">
+
+        <div class="container-fluid g-0">
+            <div class="row">
+                <div class="col-lg-12 p-0">
+                    <div class="header_iner d-flex justify-content-end align-items-center">
+                        <div class="sidebar_icon d-lg-none">
+                            <i class="ti-menu"></i>
+                        </div>
+                        <div class="header_right d-flex justify-content-between align-items-center">
+                            <div class="header_notification_warp d-flex align-items-center">
+                                {% if session.user_connected.role!=2 %}
+                                    <li>
+                                        <a class="bell_notification_clicker {% if nbr_notifications and nbr_notifications>0 %}nav-link-notify{% endif %}" href="/notification"> <img
+                                                src="{{ url_for('static', filename='img/sales/icon/bell.svg') }}" alt>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </div>
+                            <div class="profile_info">
+                                <img src="{{ url_for('static', filename=session.user_connected.profil) }}" alt="#" style="border-radius:50%;width:30px;height:30px;">
+                                <div class="profile_info_iner">
+                                    <div class="profile_author_name">
+                                        <p>{% if session.user_connected.role==0  %}Admin {% elif session.user_connected.role==1 %} Gestionnaire {% else %} Client {% endif %}</p>
+                                        <h5>{{ session.user_connected.prenom }} {{ session.user_connected.nom }}</h5>
+                                    </div>
+                                    <div class="profile_info_details">
+                                        <a href="/profil">Mon profil</a>
+                                        <a href="/profil/logout">Deconnexion</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main_content_iner overly_inner">
+            {% block contents %}
+            
+            {% endblock contents %}
+        </div>
+
+        {% include "component/footer.sales.html" %}
+    </section>
+    
+    {% if msg_succes and msg_succes!="" %}
+        <div class="bg-success msg-success">
+            <h3>{{ msg_succes }}</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>              
+        </div>
+    {% endif %}
+    
+    {% if msg_error and msg_error != "" %}
+        <div class="bg-danger msg-success">
+            <h3>{{ msg_error }}</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+              </svg>                          
+        </div>
+    {% endif %}
+        
+    {% if ask %}
+        <div class="content-ask">
+            <a href="{{ a_path }}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>          
+            </a>
+            <form action="{{ path }}" method="POST">
+                <div class="row mb-3">
+                    <h3 class='col-12'> Attention ! </h3>
+                    <p>{{ infos }}</p>
+                    
+                    <input type="text" name="path" hidden/>
+                    <div class="d-flex justify-content-between align-center mt-5">
+                        <h5>Continuer ?</h5>
+                        <button type="submit">Oui</button>
+                    </div>
+                </div>
+            </form>                        
+        </div>
+    {% endif %}
+    
+    
+    {% block js %}
+        {% include "component/script.sales.html" %}
+    {% endblock js %}
+{% endblock body %}

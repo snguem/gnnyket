@@ -1,0 +1,37 @@
+{% extends "shared/base.view.html" %}
+
+
+{% block tab_head %}
+    <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Nom et Prenom</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">Mail</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Etat</th>
+    </tr>
+{% endblock tab_head %}
+{% block tab_content %}
+    {% for client in clients %}
+        <tr>
+            <td scope="row">
+                <div class="customer d-flex align-items-center">
+                    <div class="thumb_34 mr_15 mt-0">
+                        <img class="img-fluid radius_50" style="width:30px;height:30px;" src="{{ url_for('static', filename=client.profil) }}" alt>
+                    </div>
+                </div>
+            </td>
+            <td>{{ client.prenom.title()}} {{ client.nom.capitalize() }}</td>
+            <td>{{ client.adresse }}</td>
+            <td>{{ client.mail }}</td>
+            <td>{{ client.contact }}</td>
+            <td>
+                {% if client.etat==1 %}
+                    <p class="badge_btn_5">Actif</p>
+                {% else %}
+                    <p class="badge_btn_6">Inactif</p>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock tab_content %}

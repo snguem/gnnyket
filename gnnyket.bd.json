@@ -1,0 +1,796 @@
+{
+    "name": "gnnyket",
+    "tables": [
+        {
+            "name": "type_produit",
+            "primary_gived": true,
+            "primary_index": 1,
+            "attributs": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": true,
+                    "auto_increment": true,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "ref",
+                    "type": "varchar",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "libelle",
+                    "type": "varchar",
+                    "length": 50,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "etat",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "coupon",
+            "primary_gived": true,
+            "primary_index": 5,
+            "attributs": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": true,
+                    "auto_increment": true,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "code",
+                    "type": "varchar",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "date_crea",
+                    "type": "date",
+                    "length": 0,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "date_exp",
+                    "type": "date",
+                    "length": 0,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "reduction",
+                    "type": "float",
+                    "length": 5,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "etat",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "user",
+            "primary_gived": true,
+            "primary_index": 11,
+            "attributs": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": true,
+                    "auto_increment": true,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "nom",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "prenom",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "adresse",
+                    "type": "varchar",
+                    "length": 40,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "contact",
+                    "type": "varchar",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "mail",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "profil",
+                    "type": "varchar",
+                    "length": 1000,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "role",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "password",
+                    "type": "varchar",
+                    "length": 100,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "etat",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "produit",
+            "primary_gived": true,
+            "primary_index": 21,
+            "attributs": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": true,
+                    "auto_increment": true,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "img",
+                    "type": "varchar",
+                    "length": 1000,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "libelle",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "qte_stock",
+                    "type": "int",
+                    "length": 10,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "qte_cmde",
+                    "type": "int",
+                    "length": 10,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "categorie",
+                    "type": "varchar",
+                    "length": 50,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "prix",
+                    "type": "float",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "taille",
+                    "type": "varchar",
+                    "length": 10,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "description",
+                    "type": "varchar",
+                    "length": 2000,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "etat",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "commande",
+            "primary_gived": true,
+            "primary_index": 31,
+            "attributs": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": true,
+                    "auto_increment": true,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "ref",
+                    "type": "varchar",
+                    "length": 20,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "date",
+                    "type": "date",
+                    "length": 0,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "montant",
+                    "type": "float",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "heure",
+                    "type": "int",
+                    "length": 20,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "montant_paye",
+                    "type": "float",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "client",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": true,
+                        "table_name": "user",
+                        "attribut_name": "id"
+                    }
+                },
+                {
+                    "name": "etat",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "uneCommandeProduit",
+            "primary_gived": true,
+            "primary_index": 40,
+            "attributs": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": true,
+                    "auto_increment": true,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "montant",
+                    "type": "float",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "produit",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": true,
+                        "table_name": "produit",
+                        "attribut_name": "id"
+                    }
+                },
+                {
+                    "name": "commande",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": true,
+                        "table_name": "commande",
+                        "attribut_name": "id"
+                    }
+                },
+                {
+                    "name": "qte",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "etat",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "notification",
+            "primary_gived": true,
+            "primary_index": 46,
+            "attributs": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "length": 11,
+                    "primary_key": true,
+                    "auto_increment": true,
+                    "unique": true,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "message",
+                    "type": "varchar",
+                    "length": 1000,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "type",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "action",
+                    "type": "varchar",
+                    "length": 10,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "nom",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "prenom",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "adresse",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "sujet",
+                    "type": "varchar",
+                    "length": 30,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                },
+                {
+                    "name": "etat",
+                    "type": "int",
+                    "length": 1,
+                    "primary_key": false,
+                    "auto_increment": false,
+                    "unique": false,
+                    "default_value": null,
+                    "foreign_key": {
+                        "value": false,
+                        "table_name": null,
+                        "attribut_name": null
+                    }
+                }
+            ]
+        }
+    ]
+}

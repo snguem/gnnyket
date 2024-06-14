@@ -1,0 +1,89 @@
+{% extends "shared/config.shopper.html" %}
+
+{% block contents %}
+  {{ super() }}
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0"><a href="/home">Acceuil</a> <span class="mx-2 mb-0">/</span>
+          <strong class="text-black">Boutique</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-9 order-2">
+          <div class="row">
+            <div class="col-md-12 mb-5">
+              <div class="d-flex justify-content-end">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" id="dropdownMenuReference"
+                    data-toggle="dropdown">Type</button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuReference">
+                    <a class="dropdown-item" href="/shop/all">Tout</a>
+                    <div class="dropdown-divider"></div>
+                    {% for tpe in types %}                      
+                      <a class="dropdown-item" href="/shop/all?type={{ tpe.id }}">{{ tpe.libelle }}</a>
+                      {% if (loop.index)%2 == 0%}
+                        <div class="dropdown-divider"></div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-5">
+            {% for prod in produits %}
+              <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
+                <div class="block-4 text-center border">
+                  <figure class="block-4-image">
+                    <a href="/shop/single/{{ prod.id*8923 }}/{{ prod.libelle }}">
+                      <img src="{{ url_for('static', filename=prod.img) }}" style='height:150px;' alt="Image placeholder" class="img-fluid"></a>
+                  </figure>
+                  <div class="block-4-text p-4">
+                    <h3><a href="/shop/single/{{ prod.id*8923 }}/{{ prod.libelle }}">{{ prod.libelle.title() }}</a></h3>
+                    <p class="text-primary font-weight-bold">{{ prod.prix }} Fcfa</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-md-3 order-1 mb-5 mb-md-0">
+          <div class="border p-4 rounded mb-4">
+            <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+            <ul class="list-unstyled mb-0">
+              <li class="mb-1">
+                <a href="/shop/all?categori=homme" class="d-flex">
+                  <span>Hommes</span>
+                  <span class="text-black ml-auto">({{ catgs.homme }})</span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a href="/shop/all?categori=femme" class="d-flex">
+                  <span>Femmes</span> 
+                  <span class="text-black ml-auto">({{ catgs.femme }})</span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a href="/shop/all?categori=enfant" class="d-flex">
+                  <span>Enfants</span> 
+                  <span class="text-black ml-auto">({{ catgs.enfant }})</span>
+                </a>
+              </li>
+              <li class="mb-1">
+                <a href="/shop/all?categori=mixte" class="d-flex">
+                  <span>Mixtes</span> 
+                  <span class="text-black ml-auto">({{ catgs.mixte }})</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock contents %}

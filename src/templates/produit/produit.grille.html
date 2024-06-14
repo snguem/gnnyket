@@ -1,0 +1,37 @@
+{% extends "shared/base.view.html" %}
+
+{% block title_page %}Liste Produits{% endblock title_page %}
+{% block path_link %}produits{% endblock path_link %}
+{% block path_link_2 %}produits{% endblock path_link_2 %}
+
+{% block path %}
+    <li class="breadcrumb-item">Produits</li>
+    <li class="breadcrumb-item">Grille</li>
+{% endblock path %}
+
+
+{% block contents_ %}
+    <div class="row">
+        {% for prod in produits %}
+            <div class="col-md-3">
+                <div class="white_card position-relative mb_20 ">
+                    <div class="card-body">
+                        <img src="{{ url_for('static', filename=prod.img) }}" alt class="d-block mx-auto my-4" height="150">
+
+                        <div class="col col-md-12">
+                            <a class="f_w_400 color_text_3 f_s_14 d-block text-center">{{ prod.libelle.title() }}</a>
+                        </div>
+                        <div class="col-auto">
+                            <h4 class="text-dark mt- text-center">{{ prod.prix_format }} Fcfa</h4>
+                        </div>
+
+                        <div class="d-grid mt-3">
+                            <a href="/produits/details/{{ prod.id*3425 }}/{{ prod.libelle }}" class="btn_2 text-center">Voir les details</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock contents_ %}

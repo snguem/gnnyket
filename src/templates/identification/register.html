@@ -1,0 +1,67 @@
+{% extends "shared/base.html" %}
+
+{% block head %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Inscription</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    
+{% endblock head %}
+
+{% block body %}
+    <div class="content">
+        <form action="" method="post">
+            <div>
+                <h3>Register</h3>
+            </div>
+            <div  class="two">
+                <div>
+                    <label for="nom">Nom</label>
+                    <input type="text" name="nom" id="" placeholder="Entrez votre nom"  {% if request.form.nom %}value="{{ request.form.nom }}"{% endif %}>
+                    <span class="{% if errors.nom %}active{% endif %}">{{ errors.nom}}</span>
+                </div>
+                <div>
+                    <label for="nom">Prenom</label>
+                    <input type="text" name="prenom" id="" placeholder="Entrez votre prenom" {% if request.form.prenom %}value="{{ request.form.prenom }}"{% endif %}>
+                    <span class="{% if errors.prenom %}active{% endif %}">{{ errors.prenom }}</span>
+                </div>
+            </div>
+            <div  class="two">
+                <div>
+                    <label for="adresse">Adresse</label>
+                    <input type="text" name="adresse" id="" placeholder="Entrez votre adresse"  {% if request.form.adresse %}value="{{ request.form.adresse }}"{% endif %}>
+                    <span  class="{% if errors.adresse %}active{% endif %}">{{ errors.adresse }}</span>
+                </div>
+                <div>
+                    <label for="contact">Contact</label>
+                    <input type="text" name="contact" id="" placeholder="Entrez votre contact"  {% if request.form.contact %}value="{{ request.form.contact }}"{% endif %}>
+                    <span class="{% if errors.contact %}active{% endif %}">{{ errors.contact }}</span>
+                </div>
+            </div>
+            <div>
+                <label for="mail">E-mail</label>
+                <input type="email" name="mail" id="" placeholder="Entrez votre mail"  {% if request.form.mail %}value="{{ request.form.mail }}"{% endif %}>
+                <span class="{% if errors.mail %}active{% endif %}">{{ errors.mail }}</span>
+            </div>
+            <div class="two">
+                <div>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="" placeholder="Entrez votre mot de passe"  {% if request.form.password %}value="{{ request.form.password }}"{% endif %}>
+                    <span class="{% if errors.password %}active{% endif %}">{{ errors.password }}</span>
+                </div>
+                <div>
+                    <label for="password_confirm">Confirmation</label>
+                    <input type="password" name="password_confirm" id="" placeholder="Confirmer votre mot de passe">
+                    <span class="{% if errors.password_confirm %}active{% endif %}">{{ errors.password_confirm }}</span>
+                </div>
+            </div>
+            <span class="line"></span>
+            <div class="connexion">
+                <button type="submit">Inscription</button>
+                <p>Vous avez compte? connectez vous <a href="/login">ici</a></p>
+            </div>
+        </form>
+    </div>
+{% endblock body %}

@@ -1,0 +1,67 @@
+{% extends "shared/base.view.html" %}
+
+{% block title_page %}Type Produits{% endblock title_page %}
+
+{% block path %}
+    <li class="breadcrumb-item">Type produits</li>
+    <li class="breadcrumb-item">Liste</li>
+{% endblock path %}
+
+
+{% block dispo_ %} {% endblock dispo_ %}
+
+{% block contents_ %}
+    <div>
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_body">
+                            <div class="QA_section mt_30">
+                                <div class="white_box_tittle list_header justify-content-end">
+                                    <div class="box_right d-flex lms_block">
+                                        <form method="POST" class="serach_field_2 d-flex align-items-center justify-content-end">
+                                            <div>
+                                                <div>
+                                                    <input type="text" class="form-control" placeholder="Entrer le libelle ici..." name="libelle">
+                                                </div>
+                                            </div>
+                                            <div class="add_button ms-2">
+                                                <button type="submit" class="btn_1">Ajouter</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="QA_table mb_30">
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Reference</th>
+                                                <th scope="col">Libelle</th>
+                                                <th scope="col">Produits de ce type</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for prod in prods %}
+                                                <tr>
+                                                    <td>{{ prod.ref }}</td>
+                                                    <td>{{ prod.libelle.title() }}</td>
+                                                    <td>{{ prod.nbr }}</td>
+                                                    <td><a href="/type/produit/{{ prod.id*100 }}/del" class="badge_btn_6">Supprimer</p></td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contents_ %}

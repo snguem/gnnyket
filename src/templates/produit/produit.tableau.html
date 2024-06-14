@@ -1,0 +1,73 @@
+{% extends "shared/base.view.html" %}
+
+{% block title_page %}Liste Produits{% endblock title_page %}
+{% block path_link %}produits{% endblock path_link %}
+{% block path_link_2 %}produits{% endblock path_link_2 %}
+
+{% block path %}
+    <li class="breadcrumb-item">Produits</li>
+    <li class="breadcrumb-item">{% block dispo %}Tableau{% endblock dispo %}</li>
+{% endblock path %}
+
+{% block en_tete %}
+    <div class="white_box_tittle row mb_20 align-items-center">
+        <div class=" gap-2 col-lg-6 ">
+            <a href="/produits/liste?filter=all" class="badge_btn_1">Tout</a>
+            <a href="/produits/liste?filter=enfant" class="badge_btn_2">Enfants</a>
+            <a href="/produits/liste?filter=femme" class="badge_btn_3">Femmes</a>
+            <a href="/produits/liste?filter=homme" class="badge_btn_4">Hommes</a>
+            <a href="/produits/liste?filter=mixte" class="badge_btn_5">Mixte</a>
+        </div>
+
+        <div class="box_right d-flex lms_block align-items-center justify-content-end col-lg-6">
+            <div class="serach_field_2">
+                <div class="search_inner">
+                    <form method="POST">
+                        <div class="search_field">
+                            <input type="text" name="libelle" placeholder="Entrer le nom du produit">
+                        </div>
+                        <button type="submit"> <i class="ti-search"></i> </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock en_tete %}
+
+{% block tab_head %}
+    <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Libelle</th>
+        <th scope="col">Quantite<br>(Stock)</th>
+        <th scope="col">Quantite<br>(Commandes)</th>
+        <th scope="col">Type</th>
+        <th scope="col">Categorie</th>
+        <th scope="col">Prix</th>
+        <th scope="col" class="text-end">Action</th>
+    </tr>
+{% endblock tab_head %}
+
+{% block tab_content %}
+    {% for prod in produits %}
+        <tr>
+            <td>
+                <div class="customer d-flex align-items-center">
+                    <div class="thumb_34 mr_15 mt-0">
+                        <img class="img-fluid radius_50" style="width:30px;height:30px;" src="{{ url_for('static', filename=prod.img) }}" alt>
+                    </div>
+                </div>
+            </td>
+            <td>{{ prod.libelle.title() }}</td>
+            <td>{{ prod.qte_stock }}</td>
+            <td>{{ prod.qte_cmde }}</td>
+            <td>{{ prod.type_prod.libelle }}</td>
+            <td class=" {% if prod.categorie=='enfant' %}badge_btn_2{% elif prod.categorie=='femme' %}badge_btn_3 {% elif prod.categorie=='homme' %}badge_btn_4{% else %}badge_btn_5{% endif %}">{{ prod.categorie }}</td>
+            <td>{{ prod.prix_format }} Fcfa</td>
+            <td class="text-end">
+                <a href="/produits/details/{{ prod.id*3425 }}/{{ prod.libelle }}" class="badge_btn_4 ">modifier</a>
+                <a href="/produits/liste/{{ prod.id*3102 }}/del"class="badge_btn_1">supprimer</a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock tab_content %}

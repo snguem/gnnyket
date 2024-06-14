@@ -1,0 +1,91 @@
+{% extends "shared/base.view.html" %}
+
+{% block title_page %}Liste Commandes{% endblock title_page %}
+{% block path_link %}commandes{% endblock path_link %}
+{% block path_link_2 %}commandes{% endblock path_link_2 %}
+
+{% block path %}
+    <li class="breadcrumb-item">Commandes</li>
+    <li class="breadcrumb-item">Grille</li>
+{% endblock path %}
+
+{% block contents_ %}
+        <div class="row">
+            {% for cmmde in commandes %}
+                <div class="col-md-4">
+                    <div class="white_card mb_20">
+                        <div class="white_card_header">
+                            <div class="box_header m-0">
+                                <div class="main-title">
+                                    {% if cmmde.etat == 0 %}
+                                        <p class=" badge_btn_6">Bloquer</p>
+                                    {% elif cmmde.etat == 1 %}
+                                        <p class=" badge_btn_5">Valider</p>
+                                    {% else %}
+                                        <p class=" badge_btn_3">En attente</p>
+                                    {% endif %}
+                                </div>
+                                <div class="main-title">
+                                    <p class=" badge_btn_1">{{ cmmde.ref }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body">
+                            <div class="table-responsive">
+                                <table class="table bayer_table m-0">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <img class="byder_thumb wh_56" src="{{ url_for('static', filename= cmmde.client.profil) }}" alt>
+                                            </td>
+                                            <td>
+                                                <div class="payment_gatway">
+                                                    <h5 class="byer_name  f_s_16 f_w_700 color_theme">{{ cmmde.client.prenom.title() }} {{ cmmde.client.nom.capitalize() }}</h5>
+                                                    <p class="color_gray f_s_12 f_w_700 ">{{ cmmde.client.contact }}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" style="fill: rgba(100, 197, 177, 1);"><path d="M21 20V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2zM9 18H7v-2h2v2zm0-4H7v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2zm2-5H5V7h14v2z"></path></svg>
+                                            </td>
+                                            <td>
+                                                <div class="payment_gatway">
+                                                    <h5 class="byer_name  f_s_16 f_w_700 color_theme">{{ cmmde.date }}</h5>
+                                                    <p class="color_gray f_s_12 f_w_700 ">{{ cmmde.heure_format }}</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img class="byder_thumb wh_56" src="{{ url_for('static', filename='img/sales/Payment/1.png') }}" alt>
+                                            </td>
+                                            <td>
+                                                <div class="payment_gatway">
+                                                    <h5 class="byer_name  f_s_16 f_w_700 color_theme">Total</h5>
+                                                    <h5 class="byer_name  f_s_16 f_w_700 text_color_5">{{ cmmde.montant_format }} Fcfa</h5>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="/commandes/details/{{ cmmde.ref }}" class="badge_btn_3">Details</a>
+                                            </td>
+                                            {% if cmmde.etat==2 and session.user_connected.role!=2%}
+                                                <td>
+                                                    <a href="/commandes/grille/{{ cmmde.ref }}/1/confirm" class="badge_btn_5">Valider</a>
+                                                </td>
+                                                <td>
+                                                    <a href="/commandes/grille/{{ cmmde.ref }}/0/confirm" class="badge_btn_6">Bloquer</a>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock contents_ %}

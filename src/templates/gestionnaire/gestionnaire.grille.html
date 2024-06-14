@@ -1,0 +1,50 @@
+{% extends "shared/base.view.html" %}
+
+{% block title_page %}Liste Gestionnaires{% endblock title_page %}
+{% block path_link %}gestionaire{% endblock path_link %}
+{% block path_link_2 %}gestionaire{% endblock path_link_2 %}
+
+{% block path %}
+    <li class="breadcrumb-item">Gestionnaires</li>
+    <li class="breadcrumb-item">{% block dispo %}Grille{% endblock dispo %}</li>
+{% endblock path %}
+
+
+{% block contents_ %}
+        <div class="row">
+            {% for gest in gests %}
+                <div class="col-md-3">
+                    <div class="white_card position-relative mb_20 ">
+                        <div class="card-body">
+                            <div class="col-auto">
+                                {% if gest.etat==1 %}
+                                    <h4 class="mt- text-center badge_btn_5">Actif</h4>
+                                {% elif gest.etat==0 %}
+                                    <h4 class="text-dark mt- text-center badge_btn_6 text-white">Bloquer</h4>
+                                {% endif %}
+                            </div>
+
+                            <img src="{{ url_for('static', filename=gest.profil) }}" alt class="d-block mx-auto my-4" style="border-radius: 50%;" height="150"  width="150">
+
+                            <div class="col col-md-12">
+                                <a class="f_w_400 color_text_3 f_s_14 d-block text-center">{{ gest.prenom }} {{ gest.nom}}</a>
+                            </div>
+                            <div class="col-auto">
+                                <h4 class="text-dark mt- text-center">{{ gest.contact }}</h4>
+                            </div>
+
+                            {% if gest.etat==1 %}
+                                <div class="d-grid mt-3">
+                                    <a href="/gestionaire/grille/0?id={{ gest.id }}" class="badge_btn_6 text-center">Bloquer</a>
+                                </div>
+                            {% else %}
+                                <div class="d-grid mt-3">
+                                    <a href="/gestionaire/grille/1?id={{ gest.id }}" class="badge_btn_5 text-center">Activer</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+{% endblock contents_ %}

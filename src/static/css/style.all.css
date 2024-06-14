@@ -1,0 +1,122 @@
+
+.msg-success{
+    padding: 10px 30px;
+    position: absolute;
+    z-index: 999;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    gap: 10px;
+    transform: translateY(-50px);
+    transition: animation 0.3s;
+    animation: anime_msg 2s ease-in-out;
+    /* display: none; */
+}
+
+
+.msg-success h3{
+    font-size: 18px;
+    color: white;
+    margin: auto 0;
+}
+
+.msg-success svg,
+.msg-success-shopper svg{
+    width: 30px;
+}
+@keyframes anime_msg {
+    0% { transform: translateY(-50px); }
+    50% { transform: translateY(5px); }
+    75% { transform: translateY(5px); }
+    100% { transform: translateY(-50px); }
+}
+
+
+.content-ask{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: #0000003b;
+    top: 0px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.content-ask svg{
+    width: 40px;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    cursor: pointer;
+}
+.content-ask form{
+    padding: 20px 30px;
+    background-color: white;
+    min-width: 100px;
+    max-width: 500px;
+}
+
+.content-ask form h3{
+    text-align: center;
+    color: #dc3545;
+    margin-bottom: 50px;
+}
+
+.content-ask form p strong{
+    font-weight: 800;
+}
+
+.content-ask form h5{
+    font-weight: 800;
+}
+
+.content-ask form button{
+    padding: 5px 30px;
+    border: none;
+    background: #0dcaf0;
+    color: white;
+}
+
+.msg-success-shopper{
+    position: fixed;
+    /* top: 0; */
+    right: 20px;
+    transform: translateY(100px);
+    bottom: 0;
+    z-index: 99999;
+    padding: 10px 20px;
+    color: white;
+    /* width: 200px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    animation: anime_msg_shopper 3s ease-in-out;
+    max-width: 40%;
+    /* opacity: 0; */
+
+}
+
+
+@keyframes anime_msg_shopper {
+    0% { 
+        transform: translateY(100px); 
+    }
+    50% { transform: translateY(-20px); }
+    75% { transform: translateY(-20px); }
+    85% { transform: translateY(-20px); }
+    100% { transform: translateY(100px); }
+}
+
+
+.msg-success-shopper h3{
+    font-size: 18px;
+}
+/* 
+.msg-success-shopper svg{
+    background: yellow;
+} */

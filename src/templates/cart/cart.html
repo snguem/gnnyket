@@ -1,0 +1,106 @@
+{% extends "shared/config.shopper.html" %}
+
+{% block contents %}
+  {{ super() }}
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+          <a href="/home">Acceuil</a>
+          <span class="mx-2 mb-0">/</span>
+          <a href="/shop/all">Boutique</a>
+          <span class="mx-2 mb-0">/</span>
+          <strong class="text-black">Panier</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+        <form class="col-md-12" method="post">
+          <div class="site-blocks-table">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="product-thumbnail">Image</th>
+                  <th class="product-name">Produit</th>
+                  <th class="product-price">Prix</th>
+                  <th class="product-quantity">Quantite</th>
+                  <th class="product-total">Total</th>
+                  <th class="product-remove">Supprimer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if session.cart.nbr == 0 %}
+                  <tr>
+                    <td colspan='6'>
+                      vide
+                    </td>
+                  </tr>
+                {% else %}
+                  {% for prod_id in session.cart.produits %}
+                    <tr>
+                      <td class="product-thumbnail">
+                        <img src="{{ url_for('static', filename=session.cart.produits[prod_id].produit.img) }}" alt="Image" class="img-fluid">
+                      </td>
+                      <td class="product-name">
+                        <h2 class="h5 text-black">{{ session.cart.produits[prod_id].produit.libelle.title() }}</h2>
+                      </td>
+                      <td>{{ session.cart.produits[prod_id].produit.prix_format }} Fcfa</td>
+                      <td>
+                        <div class="input-group mb-3" style="max-width: 120px;">
+                          <input type="text" class="form-control text-center" value="{{ session.cart.produits[prod_id].qte }}"
+                            aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>
+                        </div>
+                      </td>
+                      <td>{{ session.cart.produits[prod_id].montant_format }} Fcfa</td>
+                      <td><a href="/cart/{{ session.cart.produits[prod_id].produit.id*87632 }}/del" class="btn btn-primary btn-sm">X</a></td>
+                    </tr>
+                  {% endfor %}
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-6">
+              <a href='/shop/all' class="btn btn-outline-primary btn-sm btn-block">Continuer les achats</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 pl-5">
+          <div class="row justify-content-end">
+            <div class="col-md-7">
+              <div class="row">
+                <div class="col-md-12 text-right border-bottom mb-5">
+                  <h3 class="text-black h4 text-uppercase">Total panier</h3>
+                </div>
+              </div>
+              <div class="row mb-5">
+                <div class="col-md-6">
+                  <span class="text-black">Total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                  <strong class="text-black">{{ session.cart.total_format }} Fcfa</strong>
+                </div>
+              </div>
+              <div class="row">
+                {% if session.cart.nbr > 0 %}
+                  <div class="col-md-12">
+                    <button class="btn btn-primary btn-lg py-3 btn-block"
+                      onclick="window.location='/cart/checkout'">Commander</button>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock contents %}
+    

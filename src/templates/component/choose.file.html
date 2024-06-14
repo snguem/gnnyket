@@ -1,0 +1,19 @@
+
+<script>
+    document.querySelector(".button-file").addEventListener("click",()=>{
+        document.querySelector(".file-input").click();
+    })
+
+    const fileInput = document.getElementById('fileInput');
+    fileInput.addEventListener("change", ()=>{
+        const imagePreview = document.getElementById('imagePreview');
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+    });
+    
+</script>

@@ -1,0 +1,91 @@
+body{
+    overflow-x: hidden;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.content form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    gap: 30px;
+    border: 1px solid #ababab;
+    width: 500px;
+    margin: 30px 0;
+}
+.content form h3{
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    color: #7971ea;
+}
+.content form div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #282828;
+}
+.content form div label{
+    font-size: 18px;
+    font-weight: 700;
+}
+.content form div input{
+    font-size: 16px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    border: 2px solid #ababab;
+    transition: all .2s linear;
+}
+.content form div input:focus{
+    border-color: #7971ea;
+}
+.content form span.line{
+    width: 80%;
+    margin: 0 auto;
+    background-color: #c4c4c4fd;
+    height: 1px;
+}
+.content form div span{
+    color: #ff0000;
+    font-weight: 600;
+    font-size: 18px;
+    display: none;
+}
+.content form div span.active{
+    display: block;
+}
+.content form div:first-child span{
+    text-align: center;
+}
+.content form div button{
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    width: 70%;
+    margin: 0 auto;
+    font-weight: 600;
+    font-size: 18px;
+    transition: all .3s linear;
+    background-color: #7971ea;
+}
+.content form div button:hover{
+    background-color: #4135f1;
+}
+.content form div p{
+    width: 100%;
+    text-align: center;
+}
+.content form div.two{
+    flex-direction: row;
+    gap: 20px;
+}
+.content form div.two div{
+    width: 100%;
+}

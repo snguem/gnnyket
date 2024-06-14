@@ -1,0 +1,111 @@
+{% extends "shared/config.sales.html" %}
+
+{% block contents %}
+    <div class="container-fluid p-0 ">
+        <div class="row">
+            <div class="col-12">
+                <div class="page_title_box d-flex align-items-center justify-content-between">
+                    <div class="page_title_left">
+                        <h3 class="f_s_30 f_w_700 text_white">Acceuil</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="{% if session.user_connected.role==2 %}col-lg-12 {% else %}col-lg-8{% endif %}">
+                <div class="white_card card_height_100 mb_20 ">
+                    <div class="white_card_header">
+                        <div class="box_header m-0">
+                            <div class="main-title">
+                                <h3 class="m-0">Commandes En cours</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="white_card_body QA_section">
+                        <div class="QA_table ">
+
+                            <table class="table p-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Reference</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Montant</th>
+                                        <th scope="col" class="text-end">Etat</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if nbr==0 %}
+                                        <tr>
+                                            <td colspan='4' class='text-center h2'>Aucune commande en attente!</td>
+                                        </tr>
+                                    {% else %}
+                                        {% for commande in commandes %}
+                                            <tr>
+                                                <td>
+                                                    <div class="customer d-flex align-items-center">
+                                                        <span class="f_s_20 f_w_400 color_text_3">{{ commande.ref }}</span>
+                                                    </div>
+                                                </td>
+                                                <td class="f_s_14 f_w_400 color_text_4">{{ commande.date }}</td>
+                                                <td class="f_s_14 f_w_400 color_text_3">{{ commande.montant_format }} Fcfa</td>
+                                                <td class="f_s_14 f_w_400 text-end">
+                                                    {% if commande.etat ==2 %}
+                                                        <p class="badge_btn_3">En attente</p>
+                                                    {% elif commande.etat == 1 %}
+                                                        <p class="badge_btn_5">Valider</p>
+                                                    {% else %}
+                                                        <p class="badge_btn_6">Bloquer</p>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            <a href="/commandes/liste" class="badge_btn_semi mt_30 ml_15">Voir tout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if session.user_connected.role!=2 %}
+                <div class="col-lg-4">
+                    <div class="white_card">
+                        <div class="white_card_body">
+                            <div class="monthly_plan_wraper">
+                                <div class="total_blance mt_20 mb_10">
+                                    <span class="f_s_13 f_w_700 color_gray ">Produits disponible</span>
+                                    <div
+                                        class="total_blance_inner d-flex align-items-center flex-wrap justify-content-between">
+                                        <div>
+                                            <span class="f_s_40 f_w_700 color_text_3 d-block">{{ prod_nbr }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if session.user_connected.role==0 %}
+                        <div class="white_card  mb_20">
+                            <div class="white_card_body">
+                                <div class="monthly_plan_wraper">
+                                    <div class="total_blance mt_20 mb_10">
+                                        <span class="f_s_13 f_w_700 color_gray ">Clients actifs</span>
+                                        <div
+                                            class="total_blance_inner d-flex align-items-center flex-wrap justify-content-between">
+                                            <div>
+                                                <span class="f_s_40 f_w_700 color_text_3 d-block">{{ client_nbr }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock contents %}

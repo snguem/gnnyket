@@ -1,0 +1,76 @@
+
+<nav class="sidebar vertical-scroll  ps-container ps-theme-default ps-active-y">
+    <div class="logo d-flex justify-content-center">
+        <a href="/home"><img src="{{ url_for('static', filename='img/logo_2.png') }}" style="width: 100px;"></a>
+        <div class="sidebar_close_icon d-lg-none">
+            <i class="ti-close"></i>
+        </div>
+    </div>
+    <ul id="sidebar_menu">
+        <li>
+            <a href="/dashboard">
+                <div class="icon_menu">
+                    <img src="{{ url_for('static', filename='img/sales/menu-icon/dashboard.svg') }}" alt>
+                </div>
+                <span>Acceuil</span>
+            </a>
+        </li>
+
+        {% if session.user_connected.role==0 %}
+            <li>
+                <a href="/client/liste" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{ url_for('static', filename='img/sales/menu-icon/13.svg') }}" alt>
+                    </div>
+                    <span>Clients</span>
+                </a>
+            </li>
+            <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{ url_for('static', filename='img/sales/menu-icon/6.svg') }}" alt>
+                    </div>
+                    <span>Gestionnaires</span>
+                </a>
+                <ul>
+                    <li class="mm-active"><a href="/gestionaire/liste">Liste</a></li>
+                    <li><a href="/gestionaire/new">Nouveau</a></li>
+                </ul>
+            </li>
+        {% endif %}
+
+        {% if session.user_connected.role!=2 %}
+            <li>
+                <a class="has-arrow" href="#" aria-expanded="false">
+                    <div class="icon_menu">
+                        <img src="{{ url_for('static', filename='img/sales/menu-icon/8.svg') }}" alt>
+                    </div>
+                    <span>Produits</span>
+                </a>
+                <ul>
+                    <li class="mm-active"><a href="/produits/liste">Liste</a></li>
+                    <li><a href="/produits/new">Nouveau</a></li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="/type/produit">
+                    <div class="icon_menu">
+                        <img src="{{ url_for('static', filename='img/sales/menu-icon/15.svg') }}" alt>
+                    </div>
+                    <span>Type Produit</span>
+                </a>
+            </li>
+        {% endif %}
+
+        <li>
+            <a href="/commandes/liste" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ url_for('static', filename='img/sales/menu-icon/4.svg') }}" alt>
+                </div>
+                <span>Commandes</span>
+            </a>
+        </li>
+
+    </ul>
+</nav>

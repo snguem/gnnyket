@@ -1,0 +1,60 @@
+{% extends "shared/config.shopper.html" %}
+
+{% block contents %}
+  {{ super() }}
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+          <a href="/home">Acceuil</a>
+          <span class="mx-2 mb-0">/</span>
+          <a href="/shop/all">Boutique</a>
+          <span class="mx-2 mb-0">/</span>
+          <strong class="text-black">{{ prod.libelle }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 d-flex align-center justify-content-center"  style="max-height:350px;">
+          <img src="{{ url_for('static', filename=prod.img) }}" style="max-width:350px;" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+          <h2 class="text-black">{{ prod.libelle.title() }}</h2>
+          <p>{{ prod.description }}</p>
+          <p><strong class="text-primary h4">{{ prod.prix_format }} Fcfa</strong></p>
+          <div class="mb-1 d-flex">
+            <label for="option-sm" class="d-flex mr-3 mb-3">
+              <span class="d-inline-block mr-2" style="top:-2px; position: relative;">
+                <input type="radio" id="option-sm" name="shop-sizes" checked>
+              </span>
+              <span class="d-inline-block text-black">{{ prod.taille.title() }}</span>
+            </label>
+          </div>
+          <form action="/cart/add" method="POST">
+            <input type="text" name="prod_id" value="{{ prod.id }}" hidden/>
+            <div class="mb-5">
+              <div class="input-group mb-3" style="max-width: 120px;">
+                <div class="input-group-prepend">
+                  <button type="button" class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+                </div>
+                <input type="text" min='1' name='qte_cmd' class="form-control text-center" value="1" aria-label="Example text with button addon" aria-describedby="button-addon1" readonly>
+                <div class="input-group-append">
+                  <button type="button" class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+                </div>
+              </div>
+              
+            </div>
+            <p>
+              <button type="submit" class="buy-now btn btn-sm btn-primary">Ajouter au panier</button>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock contents %}

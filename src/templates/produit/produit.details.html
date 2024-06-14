@@ -1,0 +1,246 @@
+{% extends "shared/base.view.html" %}
+
+
+{% block title_page %}{{ name }}{% endblock title_page %}
+
+{% block path %}
+    <li class="breadcrumb-item"><a href="/produits/liste">Produits</a></li>
+    <li class="breadcrumb-item">{% block dispo %}Details{% endblock dispo %}</li>
+{% endblock path %}
+
+{% block dispo_ %}{% endblock dispo_ %}
+
+{% block contents_ %}
+    <form class="row white_card" method="POST" enctype="multipart/form-data">
+        <div class="col-lg-4">
+            <div class="white_card card_height_100  mb_20">
+                <div class="white_card_header">
+                    <div class="box_header m-0">
+                        <div class="main-title">
+                            <h3 class="m-0">Image</h3>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="white_card_header align-self-top image-block">
+                    <img src="{{ url_for('static', filename=prod.img) }}" alt class="mx-auto d-block sm_w_100 imagesPreview" height="300px" id="imagePreview"/>
+                    <div class="row position-relative">
+                        <input type="file" name="image" id="fileInput" value="{{ url_for('static', filename=prod.img) }}" class="file-input" hidden>
+                        <button type="button" class="btn green_bg text-white px-4 d-inline-block button-file">Changer</button>
+                    </div>
+                    {% if errors.image %}
+                        <span class="text-danger mt-2 error_span active">{{ errors.image }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="white_card card_height_100  mb_20">
+                <div class="white_card_header">
+                    <div class="box_header m-0">
+                        <div class="main-title">
+                            <h3 class="m-0">Donnees</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="white_card_body">
+                    <div class="table-responsive">
+                        <table class="table bayer_table m-0 table-span">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Libelle</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="payment_gatway details-prod">
+                                            {% if errors.libelle %}
+                                                <input type="text" class="form-control" id="libelle" name="libelle" value="{{ request.form.libelle}}">
+                                                <span class="text-danger active">{{ errors.libelle }}</span>
+                                            {% elif request.form.libelle %}
+                                                <input type="text" class="form-control" id="libelle" name="libelle" value="{{ request.form.libelle}}">
+                                            {% else %}
+                                                <input type="text" class="form-control form-control-sm" id="libelle" name="libelle" value="{{ prod.libelle }}">
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Quantite<br>(stock)</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            {% if errors.qte_stock %}
+                                                <input type="number" class="form-control" id="qte_stock" name="qte_stock" value="{{ request.form.qte_stock}}">
+                                                <span class="text-danger active">{{ errors.qte_stock }}</span>
+                                            {% elif request.form.qte_stock %}
+                                                <input type="number" class="form-control" id="qte_stock" name="qte_stock" value="{{ request.form.qte_stock}}">
+                                            {% else %}                                           
+                                                <input type="number" min="1" class="form-control form-control-sm" value="{{ prod.qte_stock }}" name="qte_stock" id="qte_stock">
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Quantite<br>(commande)</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <input type="text" class="form-control form-control-sm" value="{{ prod.qte_cmde }}" disabled>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Prix<br>(Fcfa)</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            {% if errors.prix %}
+                                                <input type="number" class="form-control" id="prix" name="prix" value="{{ request.form.prix}}">
+                                                <span class="text-danger active">{{ errors.prix }}</span>
+                                            {% elif request.form.prix %}
+                                                <input type="number" class="form-control" id="prix" name="prix" value="{{ request.form.prix}}">
+                                            {% else %}                                           
+                                                <input type="number" min='1000' class="form-control form-control-sm" value="{{ prod.prix }}" name="prix" id="prix">
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Desc</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <textarea name="desc" id="desc" class="form-control form-control-sm" cols="30" rows="3">
+                                                {% if request.form.desc and request.form.desc.strip()!="" %}
+                                                    {{ request.form.desc.strip() }}
+                                                    {% else %}
+                                                    {{ prod.description }}
+                                                {% endif %}
+                                            </textarea>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Categorie</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            {% if request.form.categorie %}
+                                                <select name="categorie" class="form-control form-control-sm">
+                                                    <optgroup>
+                                                        <option value="" hidden>Selectionner</option>
+                                                        <option value="homme" {% if request.form.categorie=='homme' %}selected{% endif %}>Homme</option>
+                                                        <option value="femme" {% if request.form.categorie=='femme' %}selected{% endif %}>Femme</option>
+                                                        <option value="enfant" {% if request.form.categorie=='enfant' %}selected{% endif %}>Enfant</option>
+                                                        <option value="mixte" {% if request.form.categorie=='mixte' %}selected{% endif %}>Mixte</option>
+                                                    </optgroup>
+                                                </select>
+                                            {% else %}               
+                                                <select name="categorie" class="form-control form-control-sm">
+                                                    <optgroup>
+                                                        <option value="" hidden>Selectionner</option>
+                                                        <option value="homme" {% if prod.categorie=='homme' %}selected{% endif %}>Homme</option>
+                                                        <option value="femme" {% if prod.categorie=='femme' %}selected{% endif %}>Femme</option>
+                                                        <option value="enfant" {% if prod.categorie=='enfant' %}selected{% endif %}>Enfant</option>
+                                                        <option value="mixte" {% if prod.categorie=='mixte' %}selected{% endif %}>Mixte</option>
+                                                    </optgroup>
+                                                </select>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Type</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            {% if request.form.type_prod %}
+                                                <select name="type_prod" class="form-control form-control-sm">
+                                                    <optgroup>
+                                                        <option value="" hidden>Selectionner</option>
+                                                        {% for type_prod in types %}
+                                                            <option value="{{ type_prod.id }}" {% if type_id and type_id==type_prod.id %}selected{% endif %}>{{ type_prod.libelle }}</option>
+                                                        {% endfor %}
+                                                    </optgroup>
+                                                </select>
+                                            {% else %}   
+                                                <select name="type_prod" class="form-control form-control-sm">
+                                                    <optgroup>
+                                                        <option value="" hidden>Selectionner</option>
+                                                        {% for type_prod in types %}
+                                                            <option value="{{ type_prod.id }}" {% if prod.type_produit==type_prod.id %}selected{% endif %}>{{ type_prod.libelle }}</option>
+                                                        {% endfor %}
+                                                    </optgroup>
+                                                </select>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="payment_gatway">
+                                            <h5 class="byer_name  f_s_16 f_w_700 color_theme">Taille</h5>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        
+                                        <div class="payment_gatway ">
+                                            <div class="d-flex gap-5">
+                                                <div>
+                                                    <label for="small">Small</label>
+                                                    <input type="radio" name="taille" id="small" value="small" checked>
+                                                </div>
+                                                <div>
+                                                    <label for="medium">Medium</label>
+                                                    <input type="radio" name="taille" id="medium" value="medium">
+                                                </div>
+                                                <div>
+                                                    <label for="large">Large</label>
+                                                    <input type="radio" name="taille" id="large" value="large">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mb-5">
+            <div class="col-lg-3 d-flex justify-content-end me-4">
+                <button type="submit" class="btn bg-info">Enregistrer</button>
+            </div>
+        </div>
+    </form>
+{% endblock contents_ %}
+
+
+{% block js %}
+    {{ super() }}
+    {% include "component/choose.file.html" %}
+{% endblock js %}

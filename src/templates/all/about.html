@@ -1,0 +1,74 @@
+{% extends "shared/config.shopper.html" %}
+
+{% block contents %}
+
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0"><a href="index.html">Acceuil</a> <span class="mx-2 mb-0">/</span> <strong
+            class="text-black">A PROPOS</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="site-section border-bottom" data-aos="fade">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-6">
+          <div class="block-16">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/uuHHWgnq9nM?si=59WlNYBPyI3gOZig" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <div class="site-section-heading pt-3 mb-4">
+            <h2 class="text-black">Nos debuts</h2>
+          </div>
+          <p>Les débuts de notre entreprise dans la vente de vêtements en ligne ont été une aventure palpitante et pleine d'émotions. Chaque jour était une nouvelle occasion d'apprendre, d'innover et de se dépasser. Créer ma boutique virtuelle, sélectionner les pièces à proposer, établir des partenariats avec des fournisseurs... Chaque étape était un défi, mais aussi une source d'inspiration et de motivation. Apprendre à connaître mes clients, à comprendre leurs goûts et à anticiper leurs besoins a été une expérience enrichissante et gratifiante.</p>
+          <p>Malgré les obstacles rencontrés en chemin, voir mes créations être portées et appréciées par des clients du monde entier a été une véritable fierté et une source de motivation pour continuer à grandir et à évoluer dans ce domaine passionnant de la vente en ligne.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="site-section border-bottom" data-aos="fade">
+    <div class="container">
+      <div class="row justify-content-center mb-5">
+        <div class="col-md-7 site-section-heading text-center pt-4">
+          <h2>L'equipe</h2>
+        </div>
+      </div>
+      <div class="" style="display: flex;justify-content: space-evenly;">
+        <!-- <div class="col-md-6 col-lg-3">
+          <div class="block-38 text-center">
+            <div class="block-38-img">
+              <div class="block-38-header">
+                <img src="images/person_3.jpg" alt="Image placeholder" class="mb-4">
+                <h3 class="block-38-heading h4">Patrick Marx</h3>
+                <p class="block-38-subheading">Marketing</p>
+              </div>
+              <div class="block-38-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae aut minima nihil sit distinctio
+                  recusandae doloribus ut fugit officia voluptate soluta. </p>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      
+        <div class="col-md-6 col-lg-3">
+          <div class="block-38 text-center">
+            <div class="block-38-img">
+              <div class="block-38-header">
+                <img src="{{ url_for('static', filename='img/me.png') }}" alt="Image placeholder" class="mb-4">
+                <h3 class="block-38-heading h4">Steeve NGUEMA</h3>
+                <p class="block-38-subheading">Directeur General</p>
+              </div>
+              <div class="block-38-body">
+                <p>Je suis un leader passionné et visionnaire. Ma passion pour l'innovation et mon engagement envers l'excellence opérationnelle sont les piliers de ma vision pour notre site e-commerce. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock contents %}

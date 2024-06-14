@@ -1,0 +1,37 @@
+{% extends "shared/base.html" %}
+
+{% block head %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>connexion</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    
+{% endblock head %}
+
+{% block body %}
+    <div class="content">
+        <form method="post">
+            <div>
+                <h3>Login</h3>
+                <span class="{% if errors.failde %}active{% endif %}">{{ errors.failde }}</span>
+            </div>
+            <div>
+                <label for="mail">E-mail</label>
+                <input type="email" name="mail" id="" placeholder="Entrez votre mail">
+                <span class="{% if errors.mail %}active{% endif %}">{{ errors.mail}}</span>
+            </div>
+            <div>
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id=""  placeholder="Entrez votre mot de passe">
+                <span class="{% if errors.mail %}active{% endif %}">{{ errors.password}}</span>
+            </div>
+            <span class="line"></span>
+            <div class="connexion">
+                <button type="submit">Connexion</button>
+                <p>Vous n'avez pas compte? inscrivez vous <a href="/register">ici</a></p>
+            </div>
+        </form>
+    </div>
+{% endblock body %}

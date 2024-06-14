@@ -1,0 +1,28 @@
+<script>
+    function submit(element){// Sélectionnez le formulaire
+        const form = document.querySelector(element);
+        
+        // Ajoutez un écouteur d'événement pour le clic sur le bouton "Soumettre"
+        form.addEventListener('submit', (event) => {
+          // Empêche le comportement par défaut de la soumission
+          event.preventDefault();
+        
+          // Récupérez les données du formulaire
+          const formData = new FormData(form);
+        
+          // Envoyez les données à votre serveur (par exemple, via une requête AJAX)
+          fetch('/your-endpoint', {
+            method: 'POST',
+            body: formData,
+          })
+          .then(response => {
+            // Traitez la réponse du serveur
+            console.log(response);
+          })
+          .catch(error => {
+            // Gérez les erreurs
+            console.error(error);
+          });
+        });
+    }
+</script>

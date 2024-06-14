@@ -1,0 +1,142 @@
+{% extends "shared/config.shopper.html" %}
+
+{% block contents %}
+  {{ super() }}
+  <div class="bg-light py-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mb-0">
+          <a href="/home">Acceuil</a>
+          <span class="mx-2 mb-0">/</span>
+          <a href="/shop/all">Boutique</a>
+          <span class="mx-2 mb-0">/</span>
+          <a href="/cart">Panier</a>
+          <span class="mx-2 mb-0">/</span>
+          <strong class="text-black">Paiement</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="site-section">
+    <div class="container">
+      <div class="row mb-5">
+        {% if not session.user_connected %}
+          <div class="col-md-12">
+              <div class="border p-4 rounded" role="alert">
+                  Vous avez deja un compte? <a href="/login/identify">Cliquer ici</a> pour vous connectez a votre compte 
+              </div>
+          </div>
+        {% endif %}
+      </div>
+      <form class="row" method="POST" action="/cart/checkout">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <h2 class="h3 mb-3 text-black">Détails facture</h2>
+          <div class="p-3 p-lg-5 border">
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label for="nom" class="text-black">Nom <span class="text-danger">*</span></label>
+                  {% if session.user_connected %}
+                    <input type="text" class="form-control" id="nom" name="nom" readonly value="{{session.user_connected.nom}}">
+                  {% elif errors.nom %}
+                    <input type="text" class="form-control" id="nom" placeholder="Entrer votre nom" name="nom">
+                    <span class="text-danger mt-2 error_span active">{{ errors.nom }}</span>
+                  {% elif request.form.nom %}
+                    <input type="text" class="form-control" id="nom" value="{{ request.form.nom }}" name="nom">
+                  {% else %}
+                    <input type="text" class="form-control" id="nom" placeholder="Entrer votre nom" name="nom">
+                  {% endif %}
+              </div>
+              <div class="col-md-6"> 
+                <label for="prenom" class="text-black">Prenom <span class="text-danger">*</span></label>
+                {% if session.user_connected %}
+                  <input type="text" class="form-control" id="prenom" value="{{ session.user_connected.prenom }}" readonly name="prenom">
+                {% elif errors.prenom %}
+                  <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrer votre prenom">
+                  <span class="text-danger mt-2 error_span active">{{ errors.prenom }}</span>
+                {% elif request.form.prenom %}
+                  <input type="text" class="form-control" id="prenom" value="{{ request.form.prenom }}" name="prenom">
+                {% else %}
+                  <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrer votre prenom">
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-12">
+                <label for="addresse" class="text-black">Adresse <span class="text-danger">*</span></label>
+                {% if session.user_connected %}
+                  <input type="text" class="form-control" id="adresse" name="adresse" readonly value="{{session.user_connected.adresse}}">
+                {% elif errors.adresse %}
+                  <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Entrer votre addresse">
+                  <span class="text-danger mt-2 error_span active">{{ errors.adresse }}</span>
+                {% elif request.form.adresse %}
+                  <input type="text" class="form-control" id="adresse" name="adresse" value="{{  request.form.adresse }}">
+                {% else %}
+                  <input type="text" class="form-control" id="adresse" name="adresse" placeholder="Entrer votre addresse">
+                {% endif %}
+              </div>
+            </div>
+            <div class="form-group row mb-5">
+              <div class="col-md-6">
+                <label for="mail" class="text-black">Email <span class="text-danger">*</span></label>
+                  {% if session.user_connected %}
+                    <input type="email" class="form-control" id="mail" value="{{ session.user_connected.mail }}" readonly name="mail">
+                  {% elif errors.mail %}
+                    <input type="email" class="form-control" id="mail" placeholder="Entrer votre mail" name="mail">
+                    <span class="text-danger mt-2 error_span active">{{ errors.mail }}</span>
+                  {% elif request.form.mail %}
+                    <input type="email" class="form-control" id="mail" value="{{ request.form.mail }}" name="mail">
+                  {% else %}
+                    <input type="email" class="form-control" id="mail" name="mail"  placeholder="Entrer votre mail">
+                  {% endif %}
+              </div>
+              <div class="col-md-6">
+                <label for="contact" class="text-black">Contact <span class="text-danger">*</span></label>
+                  {% if session.user_connected %}
+                    <input type="text" class="form-control" value="{{ session.user_connected.contact }}" readonly id="contact" name="contact">
+                  {% elif errors.contact %}
+                    <input type="text" class="form-control" placeholder="Entrer votre contact" id="contact" name="contact">  
+                    <span class="text-danger mt-2 error_span active">{{ errors.contact }}</span>
+                  {% elif request.form.contact %}
+                    <input type="text" class="form-control" value="{{ request.form.contact }}" id="contact" name="contact">
+                  {% else %}
+                    <input type="text" class="form-control" placeholder="Entrer votre contact" id="contact" name="contact"> 
+                  {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <h2 class="h3 mb-3 text-black">Votre commande</h2>
+              <div class="p-3 p-lg-5 border">
+                <table class="table site-block-order-table mb-3">
+                  <thead>
+                    <th>Produits</th>
+                    <th>Total</th>
+                  </thead>
+                  <tbody>
+                    {% for prod_id in session.cart.produits %}
+                      <tr>
+                        <td>{{ session.cart.produits[prod_id].produit.libelle.title() }} <strong class="mx-2">x</strong> {{session.cart.produits[prod_id].qte}}</td>
+                        <td>{{ session.cart.produits[prod_id].montant_format }} Fcfa</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <div class="border p-3 mb-5 ">
+                  <h3 class="h6 mb-0"><span>Total:</span> <span style="color:green;font-weight:700;">{{ session.cart.total_format }} Fcfa</span></h3>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-lg py-3 btn-block">Valider la commande</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+{% endblock contents %}

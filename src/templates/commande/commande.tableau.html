@@ -1,0 +1,104 @@
+{% extends "shared/base.view.html" %}
+
+{% block title_page %}Liste Commandes{% endblock title_page %}
+{% block path_link %}commandes{% endblock path_link %}
+{% block path_link_2 %}commandes{% endblock path_link_2 %}
+
+{% block path %}
+    <li class="breadcrumb-item">Commandes</li>
+    <li class="breadcrumb-item">Tableau</li>
+{% endblock path %}
+
+{% block contents_ %}
+    <div>
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_body">
+                            <div class="QA_section mt_30">
+                                <div class="white_box_tittle list_header">
+                                    
+                                    <div class="">
+                                        <div class="d-flex justify-content-end gap-2">
+                                            <a href="?etat=3" class="badge_btn_2">Tout</a>
+                                            <a href="?etat=1" class="badge_btn_5">Valider</a>
+                                            <a href="?etat=2" class="badge_btn_3">En attente</a>
+                                            <a href="?etat=0" class="badge_btn_6">Annuler</a>
+                                        </div>
+                                    </div>
+                                    <div class="box_right d-flex lms_block">
+                                        <div class="serach_field_2">
+                                            {% if session.user_connected.role!=2 %}
+                                                <div class="search_inner">
+                                                    <form Active="#" method='POST'>
+                                                        <div class="search_field">
+                                                            <input type="text" name='contact' placeholder="Entrer le contact ici...">
+                                                        </div>
+                                                        <button type="submit"> <i class="ti-search"></i> </button>
+                                                    </form>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="QA_table mb_30">
+
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Reference</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Nom et Prenom</th>
+                                                <th scope="col">Contact</th>
+                                                <th scope="col">Montant</th>
+                                                <th scope="col">Etat</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if nbr==0 %}
+                                                <tr>
+                                                    <td colspan='7' class="text-center">Aucune commande disponible !</td>
+                                                </tr>
+                                            {% else %}
+                                                {% for cmmde in commandes %}
+                                                    <tr>
+                                                        <td>{{ cmmde.ref }}</td>
+                                                        <td>{{ cmmde.date }}</td>
+                                                        <td>{{ cmmde.client.prenom.title() }} {{ cmmde.client.nom.capitalize() }}</td>
+                                                        <td>{{ cmmde.client.contact }}</td>
+                                                        <td>{{ cmmde.montant_format}} Fcfa</td>
+                                                        <td>
+                                                            {% if cmmde.etat ==2 %}
+                                                                <p class="badge_btn_3">En attente</p>
+                                                            {% elif cmmde.etat == 1 %}
+                                                                <p class="badge_btn_5">Valider</p>
+                                                            {% else %}
+                                                                <p class="badge_btn_6">Bloquer</p>
+                                                            {% endif %}
+                                                        </td>
+                                                        <td  class="d-flex flex-column gap-2">
+                                                            {% if cmmde.etat==2 and session.user_connected.role!=2 %}
+                                                                <a href="/commandes/liste/{{ cmmde.ref }}/1/confirm" class="badge_btn_5">Valider</a>
+                                                                <a href="/commandes/liste/{{ cmmde.ref }}/0/confirm" class="badge_btn_6">Bloquer</a>
+                                                            {% endif %}
+                                                            <a href="/commandes/details/{{ cmmde.ref }}" class="badge_btn_3">Details</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contents_ %}
+                

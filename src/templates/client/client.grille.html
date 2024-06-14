@@ -1,0 +1,33 @@
+{% extends "shared/base.view.html" %}
+
+{% block dispo %}Grille{% endblock dispo %}
+
+{% block contents_ %}
+    <div class="row">
+        {% for client in clients %}
+            <div class="col-md-3">
+                <div class="white_card position-relative mb_20 ">
+                    <div class="card-body">
+                        <div class="col-auto">
+                            {% if client.etat==1 %}
+                                <h4 class="mt- text-center badge_btn_5">Actif</h4>
+                            {% else %}
+                                <h4 class="mt- text-center badge_btn_6">Inactif</h4>
+                            {% endif %}
+                        </div>
+
+                        <img src="{{ url_for('static', filename=client.profil) }}" alt class="d-block mx-auto my-4" height="150">
+
+                        <div class="col col-md-12">
+                            <a href="#" class="f_w_400 color_text_3 f_s_14 d-block text-center">{{ client.prenom.title()}} {{ client.nom.capitalize() }}</a>
+                        </div>
+                        <div class="col-auto">
+                            <h4 class="text-dark mt- text-center">{{ client.contact }}</h4>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock contents_ %}

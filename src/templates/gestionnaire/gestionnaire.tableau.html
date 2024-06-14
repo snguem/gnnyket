@@ -1,0 +1,43 @@
+{% extends "shared/base.view.html" %}
+
+{% block title_page %}Liste Gestionnaires{% endblock title_page %}
+{% block path_link %}gestionaire{% endblock path_link %}
+{% block path_link_2 %}gestionaire{% endblock path_link_2 %}
+
+{% block path %}
+    <li class="breadcrumb-item">Gestionnaires</li>
+    <li class="breadcrumb-item">{% block dispo %}Tableau{% endblock dispo %}</li>
+{% endblock path %}
+
+{% block tab_content %}
+    {% for gest in gests %}
+        <tr>
+            <td scope="row">
+                <div class="customer d-flex align-items-center">
+                    <div class="thumb_34 mr_15 mt-0">
+                        <img class="img-fluid radius_50" style="height:30px;width:30px;" src="{{ url_for('static', filename=gest.profil) }}" alt>
+                    </div>
+                </div>
+            </td>
+            <td>{{ gest.prenom }} {{ gest.nom }}</td>
+            <td>{{ gest.adresse }}</td>
+            <td>{{ gest.mail }}</td>
+            <td>{{ gest.contact }}</td>
+            <td>
+                {% if gest.etat == 1 %}
+                    <p class="badge_btn_5">Actif</p>
+                {% else %}
+                    <p class="badge_btn_6">Bloquer</p>
+                {% endif %}
+            </td>
+            <td>
+                {% if gest.etat == 1 %}
+                    <a href="/gestionaire/liste/0?id={{ gest.id }}" class="badge_btn_6">Bloquer</a>
+                {% else %}
+                    <a href="/gestionaire/liste/1?id={{ gest.id }}" class="badge_btn_5">Activer</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock tab_content %}
+                
